@@ -20,18 +20,19 @@ namespace ScreenSaver
         List<int> snowflakeDelays;
         int snowflakeCounter = 0;
         Random random = new Random();
+        int pointX = -1, pointY = -1;
         public Village()
         {
             InitializeComponent();
-            
+
             this.BackgroundImage = Properties.Resources.Shrek;
             this.BackgroundImageLayout = ImageLayout.Stretch;
             this.DoubleBuffered = true;
 
-            int newWindth = 60;
-            int newHight = 45;
+            int newWindth = 45;
+            int newHight = 25;
 
-            int pointX = -1, pointY = -1;
+            
 
             snowflake = Properties.Resources.Snowflake;
 
@@ -39,23 +40,12 @@ namespace ScreenSaver
 
             timer = new System.Windows.Forms.Timer();
             timer.Tick += Timer_Tick;
-            timer.Interval = 100;
+            timer.Interval = 85;
 
             snowflakeActive = new List<bool>();
             snowflakeDelays = new List<int>();
-
-            for (int i = 0; i < 200; i++)
-            {
-                pointX = random.Next(0, ClientRectangle.Width);
-                pointY = random.Next(-500, -50);
-                imagePoint = new Point(pointX, pointY);
-
-                snowflakeActive.Add(false);
-                snowflakeDelays.Add(random.Next(0, 300));
-                snowflakePoints.Add(imagePoint);
-            }
-            this.Paint += Village_Paint_1;
-            timer.Start();
+            this.Load += Village_Load;
+            
         }
 
         public void Timer_Tick(object sender, EventArgs e)
@@ -97,11 +87,27 @@ namespace ScreenSaver
         {
             for (int i = 0; i < snowflakePoints.Count; i++)
             {
-                if(snowflakeActive[i])
+                if (snowflakeActive[i])
                 {
                     e.Graphics.DrawImage(ResizeSnowflake, snowflakePoints[i]);
                 }
             }
+        }
+
+        private void Village_Load(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 150; i++)
+            {
+                pointX = random.Next(0, ClientRectangle.Width);
+                pointY = random.Next(-500, -50);
+                imagePoint = new Point(pointX, pointY);
+
+                snowflakeActive.Add(false);
+                snowflakeDelays.Add(random.Next(0, 300));
+                snowflakePoints.Add(imagePoint);
+            }
+            this.Paint += Village_Paint_1;
+            timer.Start();
         }
     }
 }

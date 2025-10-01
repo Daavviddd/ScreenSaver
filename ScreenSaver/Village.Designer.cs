@@ -39,6 +39,7 @@
             this.Name = "Village";
             this.Text = "Form1";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.Village_Load);
             this.ResumeLayout(false);
 
         }
