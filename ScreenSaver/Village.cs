@@ -96,7 +96,7 @@ namespace ScreenSaver
 
         private void Village_Load(object sender, EventArgs e)
         {
-            for (int i = 0; i < 150; i++)
+            for (int i = 0; i < 160; i++)
             {
                 pointX = random.Next(0, ClientRectangle.Width);
                 pointY = random.Next(-500, -50);
