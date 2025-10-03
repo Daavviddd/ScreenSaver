@@ -43,6 +43,9 @@ namespace ScreenSaver2
             snowflakeActive = new List<bool>();
             snowflakeDelays = new List<int>();
 
+            this.KeyPreview = true;
+            this.KeyDown += Village_KeyDown;
+
             this.Paint += Village_Paint_1;
             this.Load += Village_Load;
         }
@@ -92,7 +95,7 @@ namespace ScreenSaver2
                 }
             }
 
-            var infoText = "Нажмите ESC для выхода";
+            var infoText = "Press ESC to exit";
             var font = new Font("Arial", 12, FontStyle.Bold);
             var brush = new SolidBrush(Color.White);
             var textSize = e.Graphics.MeasureString(infoText, font);
