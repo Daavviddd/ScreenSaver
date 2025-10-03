@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Reflection;
-using System.Windows.Forms;
-
-namespace ScreenSaver
+namespace ScreenSaver2
 {
     public partial class Village : Form
     {
@@ -21,20 +15,26 @@ namespace ScreenSaver
         int snowflakeCounter = 0;
         Random random = new Random();
         int pointX = -1, pointY = -1;
+
         public Village()
         {
             InitializeComponent();
 
-            this.BackgroundImage = Properties.Resources.Shrek;
+            using (var msShrek = new MemoryStream(Properties.Resources.Shrek))
+            {
+                this.BackgroundImage = Image.FromStream(msShrek);
+            }
+
             this.BackgroundImageLayout = ImageLayout.Stretch;
             this.DoubleBuffered = true;
 
             int newWindth = 45;
             int newHight = 25;
 
-            
-
-            snowflake = Properties.Resources.Snowflake;
+            using (var msSnowflake = new MemoryStream(Properties.Resources.Snowflake))
+            {
+                snowflake = Image.FromStream(msSnowflake);
+            }
 
             ResizeSnowflake = new Bitmap(snowflake, new Size(newWindth, newHight));
 
@@ -45,7 +45,6 @@ namespace ScreenSaver
             snowflakeActive = new List<bool>();
             snowflakeDelays = new List<int>();
             this.Load += Village_Load;
-            
         }
 
         public void Timer_Tick(object sender, EventArgs e)

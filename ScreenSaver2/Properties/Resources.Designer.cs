@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ScreenSaver.Properties {
+namespace ScreenSaver2.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ScreenSaver.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ScreenSaver.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ScreenSaver2.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,22 +61,22 @@ namespace ScreenSaver.Properties {
         }
         
         /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static System.Drawing.Bitmap Shrek {
+        internal static byte[] Shrek {
             get {
                 object obj = ResourceManager.GetObject("Shrek", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((byte[])(obj));
             }
         }
         
         /// <summary>
-        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        ///   Поиск локализованного ресурса типа System.Byte[].
         /// </summary>
-        internal static System.Drawing.Bitmap Snowflake {
+        internal static byte[] Snowflake {
             get {
                 object obj = ResourceManager.GetObject("Snowflake", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
+                return ((byte[])(obj));
             }
         }
     }
