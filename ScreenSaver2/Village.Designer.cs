@@ -39,6 +39,7 @@
             Name = "Village";
             Text = "Form1";
             WindowState = FormWindowState.Maximized;
+            KeyDown += Village_KeyDown;
             ResumeLayout(false);
         }
 

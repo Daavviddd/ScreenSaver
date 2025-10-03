@@ -1,3 +1,5 @@
+using System.Drawing;
+
 namespace ScreenSaver2
 {
     public partial class Village : Form
@@ -6,9 +8,7 @@ namespace ScreenSaver2
         List<Point> snowflakePoints = new List<Point>();
         System.Windows.Forms.Timer timer;
         Image snowflake;
-        Bitmap ResizeSnowflake;
-        int deltaY = 1;
-        Image scene;
+        Bitmap resizeSnowflake;
 
         List<bool> snowflakeActive;
         List<int> snowflakeDelays;
@@ -24,19 +24,17 @@ namespace ScreenSaver2
             {
                 this.BackgroundImage = Image.FromStream(msShrek);
             }
-
             this.BackgroundImageLayout = ImageLayout.Stretch;
             this.DoubleBuffered = true;
 
-            int newWindth = 45;
-            int newHight = 25;
+            int newWidth = 45;
+            int newHeight = 25;
 
             using (var msSnowflake = new MemoryStream(Properties.Resources.Snowflake))
             {
                 snowflake = Image.FromStream(msSnowflake);
             }
-
-            ResizeSnowflake = new Bitmap(snowflake, new Size(newWindth, newHight));
+            resizeSnowflake = new Bitmap(snowflake, new Size(newWidth, newHeight));
 
             timer = new System.Windows.Forms.Timer();
             timer.Tick += Timer_Tick;
@@ -44,6 +42,8 @@ namespace ScreenSaver2
 
             snowflakeActive = new List<bool>();
             snowflakeDelays = new List<int>();
+
+            this.Paint += Village_Paint_1;
             this.Load += Village_Load;
         }
 
@@ -79,7 +79,7 @@ namespace ScreenSaver2
 
         private void Village_ResizeEnd(object sender, EventArgs e)
         {
-            scene = new Bitmap(ClientRectangle.Width, ClientRectangle.Height);
+
         }
 
         private void Village_Paint_1(object sender, PaintEventArgs e)
@@ -88,9 +88,17 @@ namespace ScreenSaver2
             {
                 if (snowflakeActive[i])
                 {
-                    e.Graphics.DrawImage(ResizeSnowflake, snowflakePoints[i]);
+                    e.Graphics.DrawImage(resizeSnowflake, snowflakePoints[i]);
                 }
             }
+
+            var infoText = "Нажмите ESC для выхода";
+            var font = new Font("Arial", 12, FontStyle.Bold);
+            var brush = new SolidBrush(Color.White);
+            var textSize = e.Graphics.MeasureString(infoText, font);
+            var textLocation = new PointF(10, ClientRectangle.Height - textSize.Height - 10);
+
+            e.Graphics.DrawString(infoText, font, brush, textLocation);
         }
 
         private void Village_Load(object sender, EventArgs e)
@@ -105,8 +113,15 @@ namespace ScreenSaver2
                 snowflakeDelays.Add(random.Next(0, 300));
                 snowflakePoints.Add(imagePoint);
             }
-            this.Paint += Village_Paint_1;
             timer.Start();
+        }
+
+        private void Village_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                this.Close();
+            }
         }
     }
 }
